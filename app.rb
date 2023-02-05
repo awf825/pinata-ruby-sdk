@@ -1,5 +1,14 @@
 require './lib/pinata'
+require 'yaml'
 
-pnt = Pinata.new("xyz")
+# for local development only
+config = YAML.load(
+    File.open('config/config.yml').read
+)
+k = config['pinata-api-key']
+s = config['pinata-api-secret']
 
-print pnt.print_key
+pnt = Pinata.new(k,s)
+
+print pnt.test_authentication
+
